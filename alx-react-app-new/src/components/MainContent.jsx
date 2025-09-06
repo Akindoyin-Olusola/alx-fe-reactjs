@@ -1,11 +1,9 @@
-const UserProfile = (props) => {
+const MainContent = () => {
   return (
-    <div style={{ border: '1px solid gray', padding: '10px', margin: '10px', borderRadius: '5px' }}>
-      <h2 style={{ color: 'blue', marginBottom: '5px' }}>{props.name}</h2>
-      <p>Age: <span style={{ fontWeight: 'bold' }}>{props.age}</span></p>
-      <p style={{ fontStyle: 'italic' }}>Bio: {props.bio}</p>
-    </div>
-  );
-};
+    <main style={{ backgroundColor: '#f4f4f4', padding: '20px', margin: '10px', borderRadius: '5px' }}>
+      <p>I love to visit New York, Paris, and Tokyo.</p>
+    </main>
+  )
+}
 
-export default UserProfile;
+export default MainContent;
