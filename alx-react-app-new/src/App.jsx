@@ -9,6 +9,7 @@ import Header from './components/Header'
 import MainContent from './components/MainContent'
 import Footer from './components/Footer'
 import UserProfile from './components/UserProfile'
+import Counter from './components/Counter'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +24,7 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
+
       <h1>Vite + React</h1>
 
       {/* 👇 Render all components */}
@@ -34,6 +36,7 @@ function App() {
         age="25" 
         bio="Loves hiking and photography" 
       />
+      <Counter />
       <Footer />
 
       <div className="card">
@@ -44,6 +47,7 @@ function App() {
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
       </div>
+
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
