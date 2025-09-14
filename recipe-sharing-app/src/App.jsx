@@ -3,6 +3,8 @@ import RecipeList from "./components/RecipeList";
 import AddRecipeForm from "./components/AddRecipeForm";
 import RecipeDetails from "./components/RecipeDetails";
 import SearchBar from "./components/SearchBar";
+import FavoritesList from "./components/FavoritesList";
+import RecommendationsList from "./components/RecommendationsList";
 
 function App() {
   return (
@@ -10,11 +12,14 @@ function App() {
       <div>
         <h1>🍲 Recipe Sharing App</h1>
 
-        {/* 🔍 Global Search */}
+        {/* ✅ Search bar always visible */}
         <SearchBar />
 
+        {/* ✅ Show favorites & recommendations */}
+        <FavoritesList />
+        <RecommendationsList />
+
         <Routes>
-          {/* 🏠 Home route: Recipe list + Add form */}
           <Route
             path="/"
             element={
@@ -24,8 +29,6 @@ function App() {
               </>
             }
           />
-
-          {/* 📄 Recipe details route */}
           <Route path="/recipes/:id" element={<RecipeDetails />} />
         </Routes>
       </div>

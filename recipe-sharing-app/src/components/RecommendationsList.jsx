@@ -1,29 +1,35 @@
-import { useRecipeStore } from '../recipeStore';
-import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import RecipeList from "./components/RecipeList";
+import AddRecipeForm from "./components/AddRecipeForm";
+import RecipeDetails from "./components/RecipeDetails";
+import SearchBar from "./components/SearchBar";
+import FavoritesList from "./components/FavoritesList";
+import RecommendationsList from "./components/RecommendationsList";
 
-const RecommendationsList = () => {
-  const recommendations = useRecipeStore((state) => state.recommendations);
-  const generateRecommendations = useRecipeStore((state) => state.generateRecommendations);
-
-  useEffect(() => {
-    generateRecommendations();
-  }, [generateRecommendations]);
-
+function App() {
   return (
-    <div>
-      <h2>✨ Recommended for You</h2>
-      {recommendations.length === 0 ? (
-        <p>No recommendations yet.</p>
-      ) : (
-        recommendations.map((recipe) => (
-          <div key={recipe.id}>
-            <h3>{recipe.title}</h3>
-            <p>{recipe.description}</p>
-          </div>
-        ))
-      )}
-    </div>
-  );
-};
+    <Router>
+      <div>
+        <h1>🍲 Recipe Sharing App</h1>
+        <SearchBar />
 
-export default RecommendationsList;
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <RecipeList />
+                <AddRecipeForm />
+                <FavoritesList /> {/* ✅ Show favorites below recipe list */}
+                <RecommendationsList /> {/* ✅ Show recommendations below favorites */}
+              </>
+            }
+          />
+          <Route path="/recipes/:id" element={<RecipeDetails />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
