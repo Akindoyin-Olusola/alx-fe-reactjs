@@ -1,13 +1,16 @@
-// src/App.jsx
-import RecipeList from './components/RecipeList';
-import AddRecipeForm from './components/AddRecipeForm';
+import AddRecipeForm from "./components/AddRecipeForm";
+import RecipeList from "./components/RecipeList";
 
 function App() {
   return (
-    <div>
+    <div style={{ padding: "1rem" }}>
       <h1>🍲 Recipe Sharing App</h1>
-      <RecipeList />
+      
+      {/* Add new recipes first */}
       <AddRecipeForm />
+      
+      {/* Display recipe list */}
+      <RecipeList />
     </div>
   );
 }
