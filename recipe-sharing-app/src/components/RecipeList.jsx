@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useRecipeStore } from "../recipeStore";
+import useRecipeStore from "./recipeStore";
 
 export default function RecipeList() {
-  const recipes = useRecipeStore((state) => state.recipes);
+  const { recipes, deleteRecipe, updateRecipe } = useRecipeStore();
+  const [editId, setEditId] = useState(null);
+  const [editedTitle, setEditedTitle] = useState("");
 
   return (
     <div>
@@ -13,12 +15,38 @@ export default function RecipeList() {
       <ul>
         {recipes.map((recipe) => (
           <li key={recipe.id}>
-            {/* ✅ Clicking recipe navigates to /recipes/:id */}
-            <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
+            {editId === recipe.id ? (
+              <>
+                <input
+                  value={editedTitle}
+                  onChange={(e) => setEditedTitle(e.target.value)}
+                />
+                <button
+                  onClick={() => {
+                    updateRecipe(recipe.id, { title: editedTitle });
+                    setEditId(null);
+                  }}
+                >
+                  Save
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
+                <button onClick={() => deleteRecipe(recipe.id)}>Delete</button>
+                <button
+                  onClick={() => {
+                    setEditId(recipe.id);
+                    setEditedTitle(recipe.title);
+                  }}
+                >
+                  Edit
+                </button>
+              </>
+            )}
           </li>
         ))}
       </ul>
     </div>
   );
 }
-
