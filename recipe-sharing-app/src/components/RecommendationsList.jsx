@@ -1,35 +1,34 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import RecipeList from "./components/RecipeList";
-import AddRecipeForm from "./components/AddRecipeForm";
-import RecipeDetails from "./components/RecipeDetails";
-import SearchBar from "./components/SearchBar";
-import FavoritesList from "./components/FavoritesList";
-import RecommendationsList from "./components/RecommendationsList";
+import { useRecipeStore } from "./recipeStore"; // ✅ Make sure path is correct
+import { useEffect } from "react";
 
-function App() {
-  return (
-    <Router>
-      <div>
-        <h1>🍲 Recipe Sharing App</h1>
-        <SearchBar />
-
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <RecipeList />
-                <AddRecipeForm />
-                <FavoritesList /> {/* ✅ Show favorites below recipe list */}
-                <RecommendationsList /> {/* ✅ Show recommendations below favorites */}
-              </>
-            }
-          />
-          <Route path="/recipes/:id" element={<RecipeDetails />} />
-        </Routes>
-      </div>
-    </Router>
+const RecommendationsList = () => {
+  const recommendations = useRecipeStore((state) => state.recommendations);
+  const generateRecommendations = useRecipeStore(
+    (state) => state.generateRecommendations
   );
-}
 
-export default App;
+  useEffect(() => {
+    generateRecommendations();
+  }, [generateRecommendations]);
+
+  return (
+    <div>
+      <h2>✨ Recommended for You</h2>
+      {recommendations.length === 0 ? (
+        <p>No recommendations yet.</p>
+      ) : (
+        <ul>
+          {/* ✅ The .map() call must be here */}
+          {recommendations.map((recipe) => (
+            <li key={recipe.id}>
+              <h3>{recipe.title}</h3>
+              <p>{recipe.description}</p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+export default RecommendationsList;
