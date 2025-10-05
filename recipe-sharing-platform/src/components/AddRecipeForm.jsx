@@ -48,11 +48,11 @@ function AddRecipeForm() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-lg mt-10">
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+    <div className="max-w-2xl mx-auto p-6 md:p-10 bg-white rounded-xl shadow-lg mt-10">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center text-gray-800">
         Add a New Recipe
       </h2>
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
         {/* Recipe Title */}
         <div>
           <label className="block text-gray-700 font-semibold mb-2">
@@ -62,7 +62,7 @@ function AddRecipeForm() {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="w-full px-3 py-2 md:px-4 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
             placeholder="Enter recipe title"
           />
           {errors.title && (
@@ -78,7 +78,7 @@ function AddRecipeForm() {
           <textarea
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="w-full px-3 py-2 md:px-4 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
             placeholder="e.g. 2 eggs, 1 cup flour..."
             rows="4"
           />
@@ -95,7 +95,7 @@ function AddRecipeForm() {
           <textarea
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="w-full px-3 py-2 md:px-4 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
             placeholder="Step 1: Preheat oven..."
             rows="4"
           />
@@ -107,7 +107,7 @@ function AddRecipeForm() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition duration-300"
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 md:py-3 rounded-lg transition duration-300"
         >
           Submit Recipe
         </button>
