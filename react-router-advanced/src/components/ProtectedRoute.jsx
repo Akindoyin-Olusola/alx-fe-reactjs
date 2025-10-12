@@ -1,13 +1,22 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-// Simulated authentication state
-const isAuthenticated = false;
+// ✅ Simulated authentication hook
+export const useAuth = () => {
+  const user = { loggedIn: true }; // Change to false to test redirection
+  return user && user.loggedIn;
+};
 
-export default function ProtectedRoute({ children }) {
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = useAuth();
+
+  // If not logged in, redirect to home or login
   if (!isAuthenticated) {
-    alert("You must log in to access this page!");
     return <Navigate to="/" replace />;
   }
+
+  // Otherwise, render protected content
   return children;
-}
+};
+
+export default ProtectedRoute;
