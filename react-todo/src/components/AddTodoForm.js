@@ -5,21 +5,23 @@ export default function AddTodoForm({ onAdd }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const trimmed = text.trim();
-    if (!trimmed) return;
-    onAdd(trimmed);
-    setText("");
+    if (text.trim()) {
+      onAdd(text);
+      setText("");
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} aria-label="add-todo-form">
+    <form onSubmit={handleSubmit}>
       <input
+        aria-label="new-todo-input"
+        type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Add todo"
-        aria-label="new-todo-input"
       />
-      <button type="submit" aria-label="add-todo-button">Add</button>
+      <button aria-label="add-todo-button" type="submit">
+        Add
+      </button>
     </form>
   );
 }
