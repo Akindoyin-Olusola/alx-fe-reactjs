@@ -1,47 +1,42 @@
 import React from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Profile from "./pages/Profile";
-import BlogPost from "./pages/BlogPost";
+import Profile from "./pages/Profile/Profile";
+import ProfileDetails from "./pages/Profile/ProfileDetails";
+import ProfileSettings from "./pages/Profile/ProfileSettings";
+import BlogList from "./pages/Blog/BlogList";
+import BlogPost from "./pages/Blog/BlogPost";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-function App() {
+const App = () => {
   return (
-    <BrowserRouter>
-      <div style={{ padding: "20px" }}>
-        <nav style={{ marginBottom: "20px" }}>
-          <Link to="/">Home</Link> |{" "}
-          <Link to="/about">About</Link> |{" "}
-          <Link to="/profile">Profile</Link> |{" "}
-          <Link to="/blog/1">Blog #1</Link>
-        </nav>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+        {/* Dynamic Blog Routes */}
+        <Route path="/blog" element={<BlogList />} />
+        <Route path="/blog/:postId" element={<BlogPost />} />
 
-          {/* Protected route example */}
-          <Route
-            path="/profile/*"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
-
-          {/* Dynamic route example */}
-          <Route path="/blog/:id" element={<BlogPost />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+        {/* Protected Routes */}
+        <Route
+          path="/profile/*"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="details" element={<ProfileDetails />} />
+          <Route path="settings" element={<ProfileSettings />} />
+        </Route>
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;
